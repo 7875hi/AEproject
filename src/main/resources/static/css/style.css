@@ -1,0 +1,65 @@
+.card-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow: hidden;
+}
+
+.a-title {
+    text-decoration: none;
+    color: #4e423b;
+}
+
+.a-title:hover {
+    color: #15751b;
+    text-decoration: underline;
+}
+
+p {
+    word-break: break-all;
+    text-align: left;
+}
+
+h3 {
+    word-break: break-all;
+}
+
+.navbar-brand {
+    position: relative;
+    left: 100px;
+}
+
+.nav-link {
+    position: relative;
+    left: 100px;
+}
+
+.nav-item {
+    position: relative;
+    left: 650px;
+}
+
+#introduce {
+    margin-top:100px;
+    padding-left:100px;
+    padding-right:100px;
+}
+
+#mb {
+    /*background:url('eden.png');*/
+    background:url('eden14.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+/*
+.bi {
+background:url("eden.png");
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center center;
+width: 100%;
+height: 1000px;
+}*/
