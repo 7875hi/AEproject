@@ -1,6 +1,7 @@
 package com.adam.eve.domain.board;
 
 import com.adam.eve.domain.BaseTimeEntity;
+import com.adam.eve.domain.reply.Reply;
 import com.adam.eve.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

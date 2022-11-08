@@ -4,34 +4,44 @@
 
 <head th:replace="layout/header :: head ('블로그')"></head>
 
-<body id="mb" class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100">
 <header th:replace="layout/header :: header"></header>
-<div class="bi"></div>
-<!-- Begin page content -->
+
+<div class="d-flex" style="position: relative; top: 30px;"><h2 style="margin-right: 10px;">총 건수:</h2><h2 th:text="${boards.totalElements}"></h2></div>
+<form class="d-flex" style="position: relative; top: 40px;" method="get" th:action="@{/}">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+           id="search" name="search" th:value="${param.search}">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 <main class="flex-shrink-0">
     <div class="container">
         <div class="p-2"></div>
-        <div id="introduce" class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative bg-light">
+        <div th:each="board : ${boards}" class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
             <div class="col p-4 d-flex flex-column position-static">
-                <a href="#" class="a-title">
-                    <h3 class="mb-0 title d-flex justify-content-center" style="padding-bottom: 10px;"><br>에덴 동산에 오신 것을 환영합니다.</h3>
-                </a><br><br>
-                <p class="card-text mb-auto d-flex justify-content-center" align="center">
-                    아담과 이브가 살았던 신들의 낙원, 에덴 동산.<br>
-                    에덴의 뱀의 꾀에 넘어가 선악과를 먹어버린 그들은 에덴 동산에서 쫓겨나게 된다.<br>
-                    하지만 무엇인가를 알고싶다는 호기심이 잘못된 것이었을까?<br>
-                    당신이 아담과 이브였다면 선악과를 먹었을까, 먹지 않았을까?<br>
-                    호기심은 무궁무진한 창조의 근본이다.<br>
-                    여기, 에덴 동산에서 당신들의 상상력을 풀어내 무엇이든지 창조해 보아라.<br>
-                    글로써 무엇이든지 창조해내는 당신이 곧 '신'일지니.
-                </p><br>
-                <div class="mb-1 text-muted d-flex justify-content-end" style="padding-top: 15px;">서기 8591년 5월 13일</div>
+                <a th:href="@{/board/{id}(id=${board.id})}" class="a-title">
+                    <h3 class="mb-0 title" style="padding-bottom: 10px;" th:text="${board.title}"></h3>
+                </a>
+                <div class="card-text mb-auto" th:text="${board.content}">
+                </div>
+                <div class="mb-1 text-muted" style="padding-top: 15px;" th:text="${#temporals.format(board.createdDate, 'yyyy-MM-dd')}"></div>
             </div>
         </div>
-
-
     </div>
 </main>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item" th:classappend="${1 == boards.pageable.pageNumber + 1} ? 'disabled' : '' ">
+            <a class="page-link" th:href="@{/(page=${boards.pageable.pageNumber - 1}, search=${param.search})}">Previous</a>
+        </li>
+        <li class="page-item" th:classappend="${i == boards.pageable.pageNumber + 1} ? 'active' : '' " th:each="i : ${#numbers.sequence(startPage, endPage)}">
+            <a class="page-link" th:href="@{/(page=${i - 1}, search=${param.search})}" th:text="${i}">1</a>
+        </li>
+        <li class="page-item" th:classappend="${boards.totalPages == boards.pageable.pageNumber + 1} ? 'disabled' : '' ">
+            <a class="page-link" th:href="@{/(page=${boards.pageable.pageNumber + 1}, search=${param.search})}">Next</a>
+        </li>
+    </ul>
+</nav>
 
 <footer th:replace="layout/footer :: footer"></footer>
 

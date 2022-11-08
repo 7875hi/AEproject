@@ -19,19 +19,6 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/board/board")
-    public String boardList(Model model,
-                            @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
-                            @RequestParam(required = false, defaultValue = "") String search) {
-        Page<Board> boards = boardService.findByTitleContainingOrContentContaining(search, search, pageable);
-        int startPage = Math.max(1, boards.getPageable().getPageNumber() - 4);
-        int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-        model.addAttribute("boards", boards);
-        return "layout/board/board";
-    }
-
     /**
      * 글작성 페이지
      */
